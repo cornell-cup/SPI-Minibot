@@ -15,7 +15,7 @@ spi.mode = 0
 try:
   while True:
     GPIO.output(19,GPIO.LOW)
-    resp = spi..readbytes(2)
+    resp = spi.readbytes(2)
     print('Received: 0x(0)'.format(binascii.hexlify(bytearray(resp))))
     time.sleep(1)
     GPIO.output(19, GPIO.HIGH)
