@@ -16,13 +16,25 @@ spi.open(device,bus)
 spi.mode = 0
 spi.max_speed_hz = 115200
 
-list = [0x43]
+list = 97
+hex = "c".encode("hex")
+hex2 = ord('c')
+#a = binascii.a2b_base64("c")
+#b = binascii.hexlify(a)
+
+
+#print b
+a = type(hex2)
+#list = [hex]
+
+print hex
+print a
 try:
   while True:
 #    GPIO.output(pin,GPIO.LOW)
    # resp = spi.readbytes(2)
-    tx = spi.writebytes(list)
-
+#    tx = spi.writebytes([hex2])
+    tx = spi.writebytes([list])
 #    print('Trasmitted:'.format(binascii.hexlify(bytearray(tx))))
    # xfer = spi.xfer2(list)
    # print('Received: 0x(0)'.format(binascii.hexlify(bytearray(xfer))))
