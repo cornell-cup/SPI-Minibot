@@ -6,21 +6,35 @@ import RPi.GPIO as GPIO
 spi = spidev.SpiDev()
 device = 0
 bus = 0
+pin = 19
 
 GPIO.setmode(GPIO.BCM) #use GPIO pins
-GPIO.setup(19,GPIO.OUT) #test if general GPIO functionality can work
+GPIO.setup(pin,GPIO.OUT) #test if general GPIO functionality can work
 #spi.no_cs = True #disable to use CS as normal GPIO
-spi.open(0,0)
+#spi.
+spi.open(device,bus)
 spi.mode = 0
+spi.max_speed_hz = 115200
+
+list = [0x43]
 try:
   while True:
-    GPIO.output(19,GPIO.LOW)
-    resp = spi.readbytes(2)
-    print('Received: 0x(0)'.format(binascii.hexlify(bytearray(resp))))
+#    GPIO.output(pin,GPIO.LOW)
+   # resp = spi.readbytes(2)
+    tx = spi.writebytes(list)
+
+#    print('Trasmitted:'.format(binascii.hexlify(bytearray(tx))))
+   # xfer = spi.xfer2(list)
+   # print('Received: 0x(0)'.format(binascii.hexlify(bytearray(xfer))))
     time.sleep(1)
-    GPIO.output(19, GPIO.HIGH)
+    rx = spi.readbytes(2)
+    print('Read: 0x(0)'.format(binascii.hexlify(bytearray(rx))))
+       
+  
+    GPIO.output(pin, GPIO.HIGH)
 finally:
   spi.close()
+  GPIO.cleanup()
 
 
-
+ 
