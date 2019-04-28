@@ -3,6 +3,7 @@ import spidev
 import time
 import RPi.GPIO as GPIO
 
+
 spi = spidev.SpiDev()
 device = 0
 bus = 0
@@ -18,10 +19,9 @@ spi.max_speed_hz = 115200
 
 list = 97
 hex = "c".encode("hex")
-hex2 = ord('c')
+hex2 = ord('D')
 #a = binascii.a2b_base64("c")
 #b = binascii.hexlify(a)
-
 
 #print b
 a = type(hex2)
@@ -34,7 +34,7 @@ try:
 #    GPIO.output(pin,GPIO.LOW)
    # resp = spi.readbytes(2)
 #    tx = spi.writebytes([hex2])
-    tx = spi.writebytes([list])
+    tx = spi.writebytes([hex2])
 #    print('Trasmitted:'.format(binascii.hexlify(bytearray(tx))))
    # xfer = spi.xfer2(list)
    # print('Received: 0x(0)'.format(binascii.hexlify(bytearray(xfer))))
