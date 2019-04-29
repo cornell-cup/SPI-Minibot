@@ -1,8 +1,6 @@
 import binascii
 import spidev
 import time
-import RPi.GPIO as GPIO
-
 
 def setSlave(PiBus)
   spi = spidev.SpiDev()
