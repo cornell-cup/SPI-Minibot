@@ -4,53 +4,79 @@ import time
 import RPi.GPIO as GPIO
 
 
+def setSlave(PiBus)
+  spi = spidev.SpiDev()
+  device = 0
+  bus = PiBus
+  spi.open(device,bus)
+  spi.mode = 0
+  spi.max_speed_hz = 115200
 
-
-spi = spidev.SpiDev()
-device = 0
-bus = 0
-pin = 19
-
-GPIO.setmode(GPIO.BCM) #use GPIO pins
-GPIO.setup(pin,GPIO.OUT) #test if general GPIO functionality can work
-#spi.no_cs = True #disable to use CS as normal GPIO
-#spi.
-spi.open(device,bus)
-spi.mode = 0
-spi.max_speed_hz = 115200
-
-list = 97
-hex = "c".encode("hex")
-hex2 = ord('F')
-#a = binascii.a2b_base64("c")
-#b = binascii.hexlify(a)
-
-#print b
-a = type(hex2)
-#list = [hex]
-
-print hex
-print a
-try:
+def transmit(message)  
+  try:
   while True:
-#    GPIO.output(pin,GPIO.LOW)
-   # resp = spi.readbytes(2)
-#    tx = spi.writebytes([hex2])
-    tx = spi.writebytes([hex2])
-#    print('Trasmitted:'.format(binascii.hexlify(bytearray(tx))))
-   # xfer = spi.xfer2(list)
-   # print('Received: 0x(0)'.format(binascii.hexlify(bytearray(xfer))))
+    tx = spi.writebytes([message])
     time.sleep(10)
     rx = spi.readbytes(2)
-    print('Read: 0x(0)'.format(binascii.hexlify(bytearray(rx))))
-       
+    print('Read: 0x(0)'.format(binascii.hexlify(bytearray(rx)))
+  finally:
+    spi.close()
+
+
+def fwd()
+  setSlave(0)
+  cmd = ord('F')
+  #print b
+  print cmd
+  transmit(cmd)
   
-    GPIO.output(pin, GPIO.HIGH)
-finally:
-  spi.close()
-  GPIO.cleanup()
+def back()
+  setSlave(0)
+  cmd = ord('B')
+  #print b
+  print cmd
+  transmit(cmd)          
 
+def left()
+  setSlave(0)
+  cmd = ord('L')
+  #print b
+  print cmd
+  transmit(cmd) 
+          
+def right()
+  setSlave(0)
+  cmd = ord('R')
+  #print b
+  print cmd
+  transmit(cmd)     
+    
+def claw()
+  setSlave(0)
+  cmd = ord('C')
+  #print b
+  print cmd
+  transmit(cmd)
 
- 
-def main():
+def armL()
+  setSlave(1)
+  cmd = ord('T')
+  #print b
+  print cmd
+  transmit(cmd)            
+          
+def armR()
+  setSlave(1)
+  cmd = ord('O')
+  #print b
+  print cmd
+  transmit(cmd)
+   
+def shoulder()
+  setSlave(1)
+  cmd = ord('S')
+  #print b
+  print cmd
+  transmit(cmd)            
+
   
