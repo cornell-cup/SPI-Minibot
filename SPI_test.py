@@ -4,6 +4,8 @@ import time
 import RPi.GPIO as GPIO
 
 
+
+
 spi = spidev.SpiDev()
 device = 0
 bus = 0
@@ -19,7 +21,7 @@ spi.max_speed_hz = 115200
 
 list = 97
 hex = "c".encode("hex")
-hex2 = ord('D')
+hex2 = ord('F')
 #a = binascii.a2b_base64("c")
 #b = binascii.hexlify(a)
 
@@ -38,7 +40,7 @@ try:
 #    print('Trasmitted:'.format(binascii.hexlify(bytearray(tx))))
    # xfer = spi.xfer2(list)
    # print('Received: 0x(0)'.format(binascii.hexlify(bytearray(xfer))))
-    time.sleep(1)
+    time.sleep(10)
     rx = spi.readbytes(2)
     print('Read: 0x(0)'.format(binascii.hexlify(bytearray(rx))))
        
@@ -50,3 +52,5 @@ finally:
 
 
  
+def main():
+  
